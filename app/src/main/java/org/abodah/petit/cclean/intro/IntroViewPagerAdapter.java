@@ -12,6 +12,8 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import org.abodah.petit.cclean.R;
 
+import java.util.List;
+
 public class IntroViewPagerAdapter extends PagerAdapter {
     Context mContext;
     List<ScreenItem> mListScreen;

@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
+
 import org.abodah.petit.cclean.R;
 
 import java.util.ArrayList;
