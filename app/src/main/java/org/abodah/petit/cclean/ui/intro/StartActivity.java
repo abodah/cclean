@@ -1,11 +1,9 @@
-package org.abodah.petit.cclean.intro;
+package org.abodah.petit.cclean.ui.intro;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -15,30 +13,25 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import org.abodah.petit.cclean.R;
+import org.abodah.petit.cclean.ui.main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StartActivity extends AppCompatActivity {
+
     IntroViewPagerAdapter introViewPagerAdapter;
     TabLayout tabIndicator;
     Button btnSkip, btnGetStarted;
     LinearLayout linearLayoutSkip, linearLayoutGetStarted;
     private ViewPager screenPager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Membuat layar fullscreen
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        if (restorePreData()) {
-            Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(mainActivity);
-            finish();
-        }
-
         setContentView(R.layout.activity_start);
+
         // Views
         btnSkip = findViewById(R.id.btn_skip);
         btnGetStarted = findViewById(R.id.btn_get_started);
@@ -51,7 +44,6 @@ public class StartActivity extends AppCompatActivity {
         mList.add(new ScreenItem("Get Information About Your Plants", "You can scan information of your plant or a pest that harm your plant and get information how to take care that problems.", R.drawable.page_second));
         mList.add(new ScreenItem("Build & Share with Community", "You can create group or community of your garden or community in your city. And you can also trade, lend, buy, or share any goods with other people", R.drawable.page_third));
 
-
         // Setup ViewPager
         screenPager = findViewById(R.id.screen_viewpager);
         introViewPagerAdapter = new IntroViewPagerAdapter(this, mList);
@@ -61,12 +53,7 @@ public class StartActivity extends AppCompatActivity {
         tabIndicator.setupWithViewPager(screenPager);
 
         // Button Skip
-        btnSkip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                screenPager.setCurrentItem(screenPager.getCurrentItem() + 1, true);
-            }
-        });
+        btnSkip.setOnClickListener(view -> screenPager.setCurrentItem(screenPager.getCurrentItem() + 1, true));
 
         tabIndicator.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
@@ -86,34 +73,44 @@ public class StartActivity extends AppCompatActivity {
         });
 
         //Button Get Started
-        btnGetStarted.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(mainActivity);
-                savePrefsData();
-                finish();
-            }
+        btnGetStarted.setOnClickListener(view -> {
+            Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(mainActivity);
+            savePrefsData();
+            finish();
         });
-    }
 
+    }
 
     private boolean restorePreData() {
+
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
+
         Boolean isIntroActivityOpenedBefore = preferences.getBoolean("isIntroOpened", false);
+
         return isIntroActivityOpenedBefore;
+
     }
 
+
     private void savePrefsData() {
+
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
+
         SharedPreferences.Editor editor = preferences.edit();
+
         editor.putBoolean("isIntroOpened", true);
+
         editor.apply();
+
     }
 
 
     private void loadLastScreen() {
+
         linearLayoutSkip.setVisibility(View.INVISIBLE);
+
         linearLayoutGetStarted.setVisibility(View.VISIBLE);
+
     }
 }

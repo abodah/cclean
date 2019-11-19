@@ -1,4 +1,4 @@
-package org.abodah.petit.cclean.intro;
+package org.abodah.petit.cclean.ui.intro;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".intro.StartActivity">
+    tools:context=".ui.intro.StartActivity">
 
     <LinearLayout
         android:id="@+id/linear_layout_skip"
@@ -80,7 +80,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:tabBackground="@drawable/indicator_selector"
         app:tabIndicatorHeight="0dp"
-        app:tabPaddingStart="16dp"></com.google.android.material.tabs.TabLayout>
+        app:tabPaddingStart="16dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
